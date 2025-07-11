@@ -2,6 +2,20 @@ const graphql = require('graphql')
 const _ = require('lodash')
 const {GraphQLObjectType, GraphQLString, GraphQLInt ,GraphQLSchema, GraphQLID} = graphql
 
+
+//dummy data
+var books = [
+    {name: "Name of the wind", genre: "Fantasy", id: "1", authorId: '1'},
+    {name: "The final empire", genre: "Fantasy", id: "2", authorId: '2'},
+    {name: "The long Earth", genre: "sci-fi", id: "3", authorId: '3'}
+]
+var authors = [
+    {name: 'Patrick rothwhatever', age: 44, id: '1'},
+    {name: 'Brandon kebede', age: 55, id: '2'},
+    {name: 'Terry chala', age: 66, id: '3'}
+]
+
+
 //schemas
 //Booktype
 const BookType = new GraphQLObjectType({
@@ -10,6 +24,13 @@ const BookType = new GraphQLObjectType({
         id: {type: GraphQLID},
         name : {type: GraphQLString},
         genre : {type : GraphQLString},
+        author: {
+            type: AuthorType,
+            resolve(parent, args){
+                console.log(parent)
+                return _.find(authors, {id: parent.authorId})
+            }
+        }
 
     })
 })
@@ -24,17 +45,6 @@ const AuthorType = new GraphQLObjectType({
     })
 })
 
-//dummy data
-var books = [
-    {name: "Name of the wind", genre: "Fantasy", id: "1"},
-    {name: "The final empire", genre: "Fantasy", id: "2"},
-    {name: "The long Earth", genre: "sci-fi", id: "3"}
-]
-var authors = [
-    {name: 'Patrick rothwhatever', age: 44, id: '1'},
-    {name: 'Brandon kebede', age: 55, id: '2'},
-    {name: 'Terry chala', age: 66, id: '3'}
-]
 
 //Root Qurey
 const RootQuery = new GraphQLObjectType({
