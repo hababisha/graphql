@@ -1,3 +1,4 @@
+import AuthorList from "./components/AuthorList"
 import BookList from "./components/BookList"
 
 function App() {
@@ -5,8 +6,9 @@ function App() {
   return (
     <>
      <div id="main">
-        <h1>Ninja's reading List</h1>
+        <h1>Hello world</h1>
         <BookList />
+        <AuthorList />
       </div> 
     </>
   )
