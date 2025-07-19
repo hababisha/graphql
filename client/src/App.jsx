@@ -1,9 +1,13 @@
+import BookList from "./components/BookList"
 
 function App() {
 
   return (
     <>
-     <div>Hello world</div> 
+     <div id="main">
+        <h1>Ninja's reading List</h1>
+        <BookList />
+      </div> 
     </>
   )
 }
